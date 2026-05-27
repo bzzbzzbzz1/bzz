@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>💖 Pink Proxy 💖</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:Arial,sans-serif;
+
+    background:
+    radial-gradient(circle at top left,#ff4fd8,#ff91f5 30%,#ffc8f6 70%);
+}
+
+/* блестки */
+
+.sparkle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    opacity:.8;
+    animation:float 6s linear infinite;
+
+    box-shadow:
+    0 0 10px white,
+    0 0 20px #fff,
+    0 0 30px #ffb7f7;
+}
+
+@keyframes float{
+
+    from{
+        transform:translateY(100vh) scale(.4);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-20vh) scale(1.2);
+        opacity:0;
+    }
+}
+
+.box{
+
+    position:relative;
+    z-index:10;
+
+    width:420px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    border-radius:28px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 40px rgba(255,0,170,.4),
+    0 0 80px rgba(255,255,255,.15);
+}
+
+h1{
+
+    margin-top:0;
+
+    font-size:34px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #ffd3f8
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+p{
+    color:white;
+    line-height:1.6;
+}
+
+button{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #ff2ebd,
+        #ff7be5
+    );
+
+    color:white;
+
+    font-size:19px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+    0 0 20px rgba(255,0,170,.6),
+    0 0 50px rgba(255,150,220,.4);
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.log{
+
+    margin-top:20px;
+
+    background:rgba(255,255,255,.1);
+
+    border-radius:18px;
+
+    padding:14px;
+
+    height:180px;
+
+    overflow:auto;
+
+    text-align:left;
+
+    color:white;
+
+    font-size:13px;
+
+    white-space:pre-wrap;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sparkle" style="left:5%;animation-delay:0s"></div>
+<div class="sparkle" style="left:15%;animation-delay:2s"></div>
+<div class="sparkle" style="left:25%;animation-delay:1s"></div>
+<div class="sparkle" style="left:35%;animation-delay:3s"></div>
+<div class="sparkle" style="left:45%;animation-delay:5s"></div>
+<div class="sparkle" style="left:55%;animation-delay:2s"></div>
+<div class="sparkle" style="left:65%;animation-delay:4s"></div>
+<div class="sparkle" style="left:75%;animation-delay:1s"></div>
+<div class="sparkle" style="left:85%;animation-delay:6s"></div>
+<div class="sparkle" style="left:95%;animation-delay:3s"></div>
+
+<div class="box">
+
+<h1>💖 MTProxy 💖</h1>
+
+<p>
+Нажми кнопку чтобы добавить все proxy в Telegram ✨
+</p>
+
+<button onclick="startImport()">
+💎 Добавить Proxy 💎
+</button>
+
+<div class="log" id="log"></div>
+
+</div>
+
+<script>
+
+const proxies = [
+
+"https://t.me/proxy?server=collider.web-yektanet-com.info&port=443&secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+
+"https://t.me/proxy?server=total.beyondeson-co.cfd&port=443&secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+
+"https://t.me/proxy?server=weblog.forwarding-co.site&port=443&secret=eeNEgYdJvXrFGRMCIMJdCQRueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+
+"https://t.me/proxy?server=Shoting.forwarding-co.site.&port=44300&secret=eeNEgYdJvXrFGRMCIMJdCQ",
+
+"https://t.me/proxy?server=general.irancell-ir.cfd&port=443&secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+
+"https://t.me/proxy?server=www.merco-karco.website&port=443&secret=ee1603010200010001fc030386e24c3add626973636F7474692E79656B74616E65742E636F6D",
+
+"https://t.me/proxy?server=Ashkoda-Best.gabrial-batistuta.shop&port=443&secret=eeNEgYdJvXrFGRMCIMJdCQRueWVrdGFuZXQuY29tZmFyYWthdi5jb212YW4ubmFqdmEuY29tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+
+"https://t.me/proxy?server=87.248.129.199&port=25565&secret=79e344818749bd7ac519130220c25d09",
+
+"https://t.me/proxy?server=87.248.129.200&port=25565&secret=79e344818749bd7ac519130220c25d09",
+
+"https://t.me/proxy?server=87.248.129.205&port=25565&secret=79e344818749bd7ac519130220c25d09",
+
+"https://t.me/proxy?server=176.65.131.45&port=25565&secret=79e344818749bd7ac519130220c25d09",
+
+"https://t.me/proxy?server=195.62.32.87&port=25565&secret=79e344818749bd7ac519130220c25d09",
+
+"https://t.me/proxy?server=186.246.21.89&port=443&secret=eec11798ab008831b474066c9e1ebf5c73617669746f2e7275"
+
+];
+
+const log = document.getElementById("log");
+
+function addLog(text){
+
+    log.textContent += text + "\\n";
+
+    log.scrollTop = log.scrollHeight;
+}
+
+function sleep(ms){
+    return new Promise(r=>setTimeout(r,ms));
+}
+
+async function startImport(){
+
+    addLog("✨ Найдено proxy: " + proxies.length);
+
+    for(let i=0;i<proxies.length;i++){
+
+        addLog("💖 Открываю proxy #" + (i+1));
+
+        const tgUrl =
+            proxies[i].replace(
+                "https://t.me/proxy",
+                "tg://proxy"
+            );
+
+        window.location.href = tgUrl;
+
+        await sleep(3500);
+    }
+
+    addLog("✨ Готово ✨");
+}
+
+</script>
+
+</body>
+</html>
